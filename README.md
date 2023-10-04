@@ -126,23 +126,43 @@ n(predict(resnp.mea.x, X) == y)
 
 ## Output:
 
+## ARRAY VALUE OF X:
+
 ![Screenshot 2023-09-25 141211](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/2675fc59-95d8-4d86-bb5b-8fb302978754)
+
+## ARRAY VALUE OF Y:
 
 ![Screenshot 2023-09-25 141312](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/decddb30-a4ae-4219-9c70-bc57ee462371)
 
+## EXAM 1 SCORE GRAPH:
+
 ![Screenshot 2023-09-25 141348](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/c8ae4f74-287e-4889-a2ed-d13bfbe45df6)
+
+## SIGMOID FUNCTION GRAPH:
 
 ![Screenshot 2023-09-25 141439](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/a62c56cf-fddc-42ae-8ff6-486888b43c26)
 
+## X_TRAIN_GRAD VALUE:
+
 ![Screenshot 2023-09-25 141513](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/c01774cf-3fcd-4762-8723-cc7aefb9d568)
+
+## Y_TRAIN_GRAD VALUE:
 
 ![Screenshot 2023-09-25 141543](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/56cc8727-6ed4-4a6e-912e-ee286c9cad41)
 
+## PRINT RES.X:
+
 ![Screenshot 2023-09-25 141618](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/5ee84825-f907-4018-8982-f34257609776)
+
+## DECISION BOUNDARY_GRAPH FOR EXAM SCORE:
 
 ![Screenshot 2023-09-25 141704](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/f58e3fef-b3f3-4366-bd97-87553cdbf72b)
 
+## PROBABILITY VALUE:
+
 ![Screenshot 2023-09-25 141743](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/d4b8238c-561b-48e7-81d0-2ed288bb03b4)
+
+## PREDICTION VALUE OF MEAN:
 
 ![Screenshot 2023-09-25 141821](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/75a8b857-eeeb-45b4-843b-c94c5074bb55)
 
