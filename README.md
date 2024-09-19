@@ -25,148 +25,88 @@ To write a program to implement the the Logistic Regression Using Gradient Desce
 ```
 /*
 Program to implement the the Logistic Regression Using Gradient Descent.
-Developed by:212222230118
-RegisterNumber: S.Renuga
+Developed by:212223040019
+RegisterNumber: S.Archana
 
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy import optimize
-
-data=np.loadtxt("ex2data1.txt",delimiter=',')
-X=data[:,[0,1]]
-y=data[:,2]
-
-X[:5]
-
-y[:5]
-
-plt.figure()
-plt.scatter(X[y == 1][:, 0], X[y == 1][:, 1], label="Admitted")
-plt.scatter(X[y == 0][:, 0], X[y == 0][:, 1], label="Not admitted")
-plt.xlabel("Exam 1 score")
-plt.ylabel("Exam 2 score")
-plt.legend()
-plt.show()
-
+dataset = pd.read_csv("C:/Users/ANANDAN S/Documents/ML labs/Placement_Data.csv")
+dataset
+#drapping the serial no and salary col
+dataset = dataset.drop('sl_no', axis = 1)
+dataset = dataset.drop('salary', axis = 1)
+#categorical col for further labeling
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+dataset["gender"] = dataset["gender"].astype('category')
+dataset["ssc_b"] = dataset["ssc_b"].astype('category')
+dataset["hsc_b"] = dataset["hsc_b"].astype('category')
+dataset["hsc_s"] = dataset["hsc_s"].astype('category')
+dataset["degree_t"] = dataset["degree_t"].astype('category')
+dataset["workex"] = dataset["workex"].astype('category')
+dataset["specialisation"] = dataset["specialisation"].astype('category')
+dataset["status"] = dataset["status"].astype('category')
+dataset.dtypes
+dataset["gender"] = dataset["gender"].cat.codes
+dataset["ssc_b"] = dataset["ssc_b"].cat.codes
+dataset["hsc_b"] = dataset["hsc_b"].cat.codes
+dataset["hsc_s"] = dataset["hsc_s"].cat.codes
+dataset["degree_t"] = dataset["degree_t"].cat.codes
+dataset["workex"] = dataset["workex"].cat.codes
+dataset["specialisation"] = dataset["specialisation"].cat.codes
+dataset["status"] = dataset["status"].cat.codes
+dataset
+x = dataset.iloc[:,:-1].values
+Y = dataset.iloc[:,-1].values
+Y
+#7.initialize the model parameters
+import numpy as np
+theta = np.random.randn(x.shape[1])
+y = Y
+#define sigmoid function 
 def sigmoid(z):
-  return 1 / (1 + np.exp(-z))
-
-plt.plot()
-X_plot = np.linspace(-10, 10, 100)
-plt.plot(X_plot, sigmoid(X_plot))
-plt.show()
-
-def costFunction(theta,X,y):
-  h = sigmoid(np.dot(X, theta))
-  J = -(np.dot(y, np.log(h)) + np.dot(1 - y, np.log(1-h))) / X.shape[0]
-  grad = np.dot(X.T, h-y) / X.shape[0]
-  return J,grad
-
-X_train = np.hstack((np.ones((X.shape[0], 1)), X))
-theta = np.array([0, 0, 0])
-J, grad = costFunction(theta, X_train, y)
-print(J)
-print(grad)
-
-X_train = np.hstack((np.ones((X.shape[0], 1)), X))
-theta = np.array([-24, 0.2, 0.2])
-J, grad = costFunction(theta, X_train, y)
-print(J)
-print(grad)
-
-def cost(theta, X, y):
-  h= sigmoid(np.dot(X, theta))
-  J = - (np.dot(y, np.log(h)) + np.dot(1 - y, np.log(1 - h))) / X.shape[0]
-  return J
-
-def gradient(theta, X, y):
-  h = sigmoid(np.dot(X, theta))
-  grad = np.dot(X.T, h - y) / X.shape[0]
-  return grad
-
-X_train = np.hstack((np.ones((X.shape[0], 1)), X))
-theta = np.array([0, 0, 0])
-res = optimize.minimize(fun=cost, x0=theta, args=(X_train, y),
-                        method='Newton-CG', jac=gradient)
-print(res.fun)
-print(res.x)
-
-def plotDecisionBoundary(theta, X, y):
-  x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-  y_min, y_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-  xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.1),
-                       np.arange(y_min, y_max, 0.1))
-  X_plot = np.c_[xx.ravel(), yy.ravel()]
-  X_plot = np.hstack((np.ones((X_plot.shape[0], 1)), X_plot))
-  y_plot = np.dot(X_plot, theta).reshape(xx.shape)
-
-  plt.figure()
-  plt.scatter(X[y == 1][:, 0], X[y == 1][:, 1], label="Admitted")
-  plt.scatter(X[y == 0][:, 0], X[y == 0][:, 1], label="Not admitted")
-  plt.contour(xx, yy, y_plot, levels=[0])
-  plt.xlabel("Exam 1 score")
-  plt.ylabel("Exam 2 score")
-  plt.legend()
-  plt.show()
-
-plotDecisionBoundary(res.x, X, y)
-
-prob = sigmoid(np.dot(np.array([1, 45, 85]), res.x))
-print(prob)
-
-def predict(theta, X):
-  X_train = np.hstack((np.ones((X.shape[0], 1)), X))
-  prob = sigmoid(np.dot(X_train, theta))
-  return (prob >= 0.5).astype(int)
-
-n(predict(resnp.mea.x, X) == y)
+    return 1/(1+np.exp(-z))
+#define the loss function
+def loss(theta,x,y):
+    h = sigmoid(x.dot(theta))
+    return -np.sum(y*np.log(h)+(1-y)*log(1-h))
+#8. define the gradient descent algorithm
+def gradient_descent(theta,x,y,alpha,num_iterations):
+    m = len(y)
+    for i in range(num_iterations):
+        h = sigmoid(x.dot(theta))
+        gradient = x.T.dot(h-y)/m
+        theta = alpha*gradient
+    return theta
+#train the model
+theta = gradient_descent(theta,x,y,alpha = 0.01,num_iterations = 1000)
+#make predictions
+def predict(theta,x):
+    h = sigmoid(x.dot(theta))
+    y_pred = np.where(h>=0.5,1,0)
+    return y_pred
+y_pred = predict(theta,x)
+#evaluate themodel
+accuracy = np.mean(y_pred.flatten()==y)
+print('ACCURACY:', accuracy)
+xnew = np.array([[0,87,0,95,0,2,78,2,0,0,1,0]])
+y_prednew = predict(theta,xnew)
+print(y_prednew)
+xnew = np.array([[0,0,0,0,0,2,8,2,0,0,1,0]])
+y_prednew = predict(theta,xnew)
+print(y_prednew)
 
 */
 ```
 
 ## Output:
 
-## ARRAY VALUE OF X:
+![Screenshot 2024-09-19 084918](https://github.com/user-attachments/assets/433ae3ea-6f30-4896-b58d-c0f03befde74)
+![Screenshot 2024-09-19 084905](https://github.com/user-attachments/assets/8c7c0ff2-75e5-4658-9797-85bfa0336fa2)
+![Screenshot 2024-09-19 084849](https://github.com/user-attachments/assets/4e8cd986-13df-435c-8d90-2fc158400ced)
+![Screenshot 2024-09-19 084929](https://github.com/user-attachments/assets/ca99528d-00c2-4317-a5b7-d92be61de411)
 
-![Screenshot 2023-09-25 141211](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/2675fc59-95d8-4d86-bb5b-8fb302978754)
-
-## ARRAY VALUE OF Y:
-
-![Screenshot 2023-09-25 141312](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/decddb30-a4ae-4219-9c70-bc57ee462371)
-
-## EXAM 1 SCORE GRAPH:
-
-![Screenshot 2023-09-25 141348](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/c8ae4f74-287e-4889-a2ed-d13bfbe45df6)
-
-## SIGMOID FUNCTION GRAPH:
-
-![Screenshot 2023-09-25 141439](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/a62c56cf-fddc-42ae-8ff6-486888b43c26)
-
-## X_TRAIN_GRAD VALUE:
-
-![Screenshot 2023-09-25 141513](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/c01774cf-3fcd-4762-8723-cc7aefb9d568)
-
-## Y_TRAIN_GRAD VALUE:
-
-![Screenshot 2023-09-25 141543](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/56cc8727-6ed4-4a6e-912e-ee286c9cad41)
-
-## PRINT RES.X:
-
-![Screenshot 2023-09-25 141618](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/5ee84825-f907-4018-8982-f34257609776)
-
-## DECISION BOUNDARY_GRAPH FOR EXAM SCORE:
-
-![Screenshot 2023-09-25 141704](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/f58e3fef-b3f3-4366-bd97-87553cdbf72b)
-
-## PROBABILITY VALUE:
-
-![Screenshot 2023-09-25 141743](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/d4b8238c-561b-48e7-81d0-2ed288bb03b4)
-
-## PREDICTION VALUE OF MEAN:
-
-![Screenshot 2023-09-25 141821](https://github.com/RENUGASARAVANAN/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/119292258/75a8b857-eeeb-45b4-843b-c94c5074bb55)
-
-
-## Result:
-Thus the program to implement the the Logistic Regression Using Gradient Descent is written and verified using python programming.
+##Result:
+  The logistic regression is implemented successfully using gradient Descent
 
