@@ -9,25 +9,28 @@ To write a program to implement the the Logistic Regression Using Gradient Desce
 
 ## Algorithm
 
-1.Use the standard libraries in python for finding linear regression.
+step1: start the program
 
-2.Set variables for assigning dataset values.
+step2: Use the standard libraries in python for finding linear regression.
 
-3.Import linear regression from sklearn.
+step3:Set variables for assigning dataset values.
 
-4.Predict the values of array.
+step4:Import linear regression from sklearn.
 
-5.Calculate the accuracy, confusion and classification report by importing the required modules from sklearn.
+step5:Predict the values of array.
 
-6.Obtain the graph.
+step6:Calculate the accuracy, confusion and classification report by importing the required modules from sklearn.
 
+step7:Obtain the graph.
+
+step8:End
 ## Program:
 ```
 /*
 Program to implement the the Logistic Regression Using Gradient Descent.
 Developed by:212223040019
 RegisterNumber: S.Archana
-
+*/
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -97,7 +100,7 @@ xnew = np.array([[0,0,0,0,0,2,8,2,0,0,1,0]])
 y_prednew = predict(theta,xnew)
 print(y_prednew)
 
-*/
+
 ```
 
 ## Output:
