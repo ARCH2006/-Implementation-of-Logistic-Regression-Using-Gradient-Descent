@@ -110,6 +110,6 @@ print(y_prednew)
 ![Screenshot 2024-09-19 084849](https://github.com/user-attachments/assets/4e8cd986-13df-435c-8d90-2fc158400ced)
 ![Screenshot 2024-09-19 084929](https://github.com/user-attachments/assets/ca99528d-00c2-4317-a5b7-d92be61de411)
 
-##Result:
+## Result:
   The logistic regression is implemented successfully using gradient Descent
 
