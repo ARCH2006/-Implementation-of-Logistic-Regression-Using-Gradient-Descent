@@ -104,9 +104,14 @@ print(y_prednew)
 ```
 
 ## Output:
-
+```yvalue:
+```
 ![Screenshot 2024-09-19 084918](https://github.com/user-attachments/assets/433ae3ea-6f30-4896-b58d-c0f03befde74)
+```y_pred value:
+```
 ![Screenshot 2024-09-19 084905](https://github.com/user-attachments/assets/8c7c0ff2-75e5-4658-9797-85bfa0336fa2)
+```accuracy:
+```
 ![Screenshot 2024-09-19 084849](https://github.com/user-attachments/assets/4e8cd986-13df-435c-8d90-2fc158400ced)
 ![Screenshot 2024-09-19 084929](https://github.com/user-attachments/assets/ca99528d-00c2-4317-a5b7-d92be61de411)
 
